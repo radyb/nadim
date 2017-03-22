@@ -1,0 +1,111 @@
+<head>
+	<title>LTR/RTL Page</title>
+	
+	<link rel="stylesheet" type="text/css" href="bootstrap-3.3.7-dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/style.css" />	
+	<link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="mdl/material.min.css">
+	<script src="mdl/material.min.js"></script>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+
+	<script type="text/javascript">
+		$(document).ready(function ($) {
+			$(".btn-box.second").click(function(e) {
+		        e.preventDefault();
+		        $(".floating-panel").toggleClass("hiddn", 10000);
+		    });
+		    $(".panel-close").click(function(e) {
+		        e.preventDefault();
+		        $(".floating-panel").toggleClass("hiddn", 10000);
+		    });
+
+		    $(".btn-box.first").click(function(e) {
+		        e.preventDefault();
+		        $(this).children(":first").toggleClass("fa-star");
+		        $(this).children(":first").toggleClass("fa-star-o");
+		        $(this).children(":first").toggleClass("color-warning");
+		    });
+
+		   
+		   $(document).on("shown.bs.dropdown", ".dropdown", function () {
+			    // calculate the required sizes, spaces
+			    var $ul = $(this).children(".dropdown-menu");
+			    var $button = $(this).children(".dropdown-toggle");
+			    var ulOffset = $ul.offset();
+			    // how much space would be left on the top if the dropdown opened that direction
+			    var spaceUp = (ulOffset.top - $button.height() - $ul.height()) - $(window).scrollTop();
+			    // how much space is left at the bottom
+			    var spaceDown = $(window).scrollTop() + $(window).height() - (ulOffset.top + $ul.height());
+			    // switch to dropup only if there is no space at the bottom AND there is space at the top, or there isn't either but it would be still better fit
+			    if (spaceDown < 0 && (spaceUp >= 0 || spaceUp > spaceDown))
+			      $(this).addClass("dropup");
+			}).on("hidden.bs.dropdown", ".dropdown", function() {
+			    // always reset after close
+			    $(this).removeClass("dropup");
+			});
+
+			$(".dropdown-menu li a").click(function(){
+			  $(this).parents(".dropdown").find('.btn').html($(this).text() + ' <span class="caret"></span>');
+			  $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
+			});
+
+		});	
+	</script>
+</head>
+
+<body dir="">
+
+	
+	<div class="invite-template">
+		
+		<div class="workspace-create"> 
+			<h3 class="">Designhubz</h3>
+			<form>
+				
+				<h4>Welcome Aboard!</h4>
+				<div class="row margin-b10">
+					<div class="col-sm-6 "> 
+						<label for="firstname" class="">First name</label>
+						<input type="text" id="firstname" class="form-control" placeholder="First Name" required="" autofocus="">
+					</div>
+					<div class="col-sm-6"> 
+						<label for="lastname" class="">Last name</label>
+						<input type="text" id="lastname" class="form-control" placeholder="Last Name" required="" autofocus="">
+					</div>
+				</div>
+				<div class="row margin-b10">
+					<div class="col-sm-12"> 
+						<label for="email" class="">Your Email</label>
+						<input type="email" id="email" class="form-control" placeholder="email@gmail.com" required="" autofocus="">
+					</div>
+					
+				</div>
+				<div class="row margin-b30">
+					<div class="col-sm-12"> 
+						<label for="password" class="">Set Password</label>
+						<input type="password" id="password" class="form-control" placeholder="" required="" autofocus="">
+					</div>
+					
+				</div>
+				<div class="row ">
+					<div class="col-sm-12 center-text">
+						<button class="btn btn-green btn-lg btn200" type="submit">
+							Go to Designhubz
+							
+						</button>
+					</div>
+				</div>	
+			</form>
+		</div>
+	</div>	
+
+
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>	
+	
+</body>

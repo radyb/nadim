@@ -1,0 +1,531 @@
+<head>
+	<title>LTR/RTL Page</title>
+	
+	<link rel="stylesheet" type="text/css" href="bootstrap-3.3.7-dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/style.css" />	
+	<link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="mdl/material.min.css">
+	<script src="mdl/material.min.js"></script>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+
+	<script type="text/javascript">
+		$(document).ready(function ($) {
+			$(".btn-box.second").click(function(e) {
+		        e.preventDefault();
+		        $(".floating-panel").toggleClass("hiddn", 10000);
+		    });
+		    $(".person").click(function(e) {
+		        e.preventDefault();
+		        $(".peoples-floating-panel").toggleClass("hiddn", 10000);
+		    });
+		    $(".panel-close").click(function(e) {
+		        e.preventDefault();
+		        $(".floating-panel").toggleClass("hiddn", 10000);
+		    });
+
+		    $(".btn-box.first").click(function(e) {
+		        e.preventDefault();
+		        $(this).children(":first").toggleClass("fa-star");
+		        $(this).children(":first").toggleClass("fa-star-o");
+		        $(this).children(":first").toggleClass("color-warning");
+		    });
+
+		   
+		   $(document).on("shown.bs.dropdown", ".dropdown", function () {
+			    // calculate the required sizes, spaces
+			    var $ul = $(this).children(".dropdown-menu");
+			    var $button = $(this).children(".dropdown-toggle");
+			    var ulOffset = $ul.offset();
+			    // how much space would be left on the top if the dropdown opened that direction
+			    var spaceUp = (ulOffset.top - $button.height() - $ul.height()) - $(window).scrollTop();
+			    // how much space is left at the bottom
+			    var spaceDown = $(window).scrollTop() + $(window).height() - (ulOffset.top + $ul.height());
+			    // switch to dropup only if there is no space at the bottom AND there is space at the top, or there isn't either but it would be still better fit
+			    if (spaceDown < 0 && (spaceUp >= 0 || spaceUp > spaceDown))
+			      $(this).addClass("dropup");
+			}).on("hidden.bs.dropdown", ".dropdown", function() {
+			    // always reset after close
+			    $(this).removeClass("dropup");
+			});
+
+			$(".dropdown-menu li a").click(function(){
+			  $(this).parents(".dropdown").find('.btn').html($(this).text() + ' <span class="caret"></span>');
+			  $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
+			});
+
+		$('#interest_tabs').on('click', 'a[data-toggle="tab"]', function(e) {
+		      e.preventDefault();
+
+		      var $link = $(this);
+
+		      if (!$link.parent().hasClass('active')) {
+
+		      	if (!$link.parent().hasClass('child')) {
+		      		//remove active class from other tab-panes
+		        	$('#interest_tabs .tab-pane').removeClass('active');
+		        
+		      	};
+
+		        // click first submenu tab for active section
+		        $('a[href="' + $link.attr('href') + '_all"][data-toggle="tab"]').click();
+
+		        // activate tab-pane for active section
+		        $('.tab-content.' + $link.attr('href').replace('#','') + ' .tab-pane:first').addClass('active');
+		      }
+
+		    });
+
+			$('.selectUsers li.user').click(function(e) {
+				e.preventDefault();
+				var $el = '<div class="avatar">'+$(this).html()+'</div>';
+				$(this).parent().next('.selectedMembers').append($el);
+			});
+	
+			$(function () {
+			  $('[data-toggle="tooltip"]').tooltip()
+			})
+		
+		});	
+	</script>
+</head>
+
+<body dir="">
+	<nav class="navbar top-nav blue-bg navbar-default navbar-static-top">
+      <!-- <div class="container"> -->
+      <!-- <div class="row "> -->
+     
+        <div class="navbar-header">
+        	<a href="#" class="btn top-btn btn-primary dropdown-toggle" type="button" id="dropdownPlus" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    				<i class="material-icons">add</i>
+    			</a>
+    			<ul class="dropdown-menu top-nav-menu" aria-labelledby="dropdownPlus">
+				    <!-- <li><a href="#" data-toggle="modal" data-target="#manageWorkspace"><i class="fa fa-building" aria-hidden="true"></i> Manage Workspace</a></li> -->
+				    <li><a href="#" data-toggle="modal" data-target="#newProject"><i class="fa fa-folder-open" aria-hidden="true"></i> New Project</a></li>
+				    <li><a href="chat.html"><i class="fa fa-comments" aria-hidden="true"></i> New Chat Message</a></li>
+				    <li><a href="#" data-toggle="modal" data-target="#invitePeoples"><i class="fa fa-users" aria-hidden="true"></i> Invite People</a></li>
+				   
+				    
+				  </ul>
+
+         	<div class="search-box hide-mobile">
+				<input class="" type="text" name="search" />	
+				<a href="#">
+					<i class="fa fa-search" aria-hidden="true"></i>
+				</a>
+			</div>
+        </div>
+
+        <div id="navbar" class="">
+          
+          <ul class="nav navbar-nav navbar-right pull-right">
+          	<!-- <li>
+          		Workspace name
+          	</li> -->
+            <!-- <li><a class="btn dropdown-toggle btn-notiffication" href="#" type="button" id="dropdownNotiffication" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            		<i class="fa fa-bell-o" aria-hidden="true"></i>
+	            </a>
+	            <ul class="dropdown-menu" aria-labelledby="dropdownNotiffication">
+				    <li class="header">Messages</li>
+				    <li><br/></li>
+				    <li><br/></li>
+				   <li><br/></li>
+				    <li><br/></li>
+				    <li><br/></li>
+				    <li><br/></li>
+				  </ul>
+
+	        </li> -->
+            <li>
+            	<a href="#" class="img-btn dropdown-toggle" type="button" id="dropdownPerson" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    				<img src="https://enterprise-cdn.taskworld.com/assets/default-avatar-4dc02b82.svg">
+    				<span class="name">rady Bos</span>
+    			</a>
+    			<ul class="dropdown-menu" aria-labelledby="dropdownPerson">
+				    <li class="avatar-top">
+				    	<a href="#">
+				    		<img src="https://enterprise-cdn.taskworld.com/assets/default-avatar-4dc02b82.svg">
+				    		<div>
+				    			<span class="presence online"></span>
+				    			<span class="name">Radu Bos</span>
+				    			<span class="email">bozdog.radu@gmail.com</span>
+				    		</div>
+				    	</a>
+				    </li>
+				    <li role="separator" class="divider"></li>
+				   <!--  <li><a href="#">Account Settings</a></li>
+				    <li><a href="#">Notiffication Settings</a></li>
+				    <li role="separator" class="divider"></li> -->
+				    <li><a href="#">Sign Out</a></li>
+				   
+				    
+				  </ul>
+
+            	
+            </li>
+          </ul>
+        </div> <!--/.nav-collapse-->
+      <!-- </div> -->
+       </div>
+      
+
+    </nav>
+
+    <!-- Blue Sidebar -->
+    <div class=" sidebar blue-bg">
+		
+			
+		<a href="projectDetails.html" class="btn btn-primary left-btn-group" data-toggle="tooltip" data-placement="right" title="Projects">
+			<i class="fa fa-folder-open" aria-hidden="true"></i>
+		</a>
+		<a href="people.html" class="btn btn-primary active" data-toggle="tooltip" data-placement="right" title="People">
+			<i class="fa fa-users" aria-hidden="true"></i>
+		</a>
+		<a href="chat.html" class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Chat">
+			<i class="fa fa-comments" aria-hidden="true"></i>
+		</a>
+	</div>
+	<!-- Settings Sidebar -->
+	<div class="floating-panel ax-floating-panel peoples-floating-panel hiddn">
+		<a class="panel-close" href="#">
+			<i class="glyphicon glyphicon-remove"></i>
+		</a>
+		<div class="floating-panel-body">
+			<!-- <header class="titlebar">
+				<img src="https://enterprise-cdn.taskworld.com/assets/default-avatar-4dc02b82.svg" />
+				<p>Nadim</p>
+			</header> -->
+			<div class="floating-panel-body-content">
+				<div class="rows header">
+					<img src="https://enterprise-cdn.taskworld.com/assets/default-avatar-4dc02b82.svg" />
+				<p>Nadim</p>
+				</div>
+				<div class="rows center-text">
+					<a href="#" class="btn btn-lg btn-gray btn200">
+						<i class="fa fa-comments-o" aria-hidden="true"></i> Chat
+					</a>
+				</div>	
+				
+				<div class="rows bg-white">
+					<div class="col-sm-3 no-padding">
+						<label>Department</label>
+					</div>
+					<div class="col-sm-9">
+						: 
+					</div>
+				</div>
+				<div class="rows bg-grey">
+					<div class="col-sm-3 no-padding">
+						<label>Job Title</label>
+					</div>
+					<div class="col-sm-9">
+						: 
+					</div>
+				</div>
+				<div class="rows bg-white">
+					<div class="col-sm-3 no-padding">
+						<label>Phone</label>
+					</div>
+					<div class="col-sm-9">
+						: 
+					</div>
+				</div>
+				<div class="rows bg-grey">
+					<div class="col-sm-3 no-padding">
+						<label>Email</label>
+					</div>
+					<div class="col-sm-9">
+						: bozdog.radu@gmail.com
+					</div>
+				</div>
+				<div class="rows bg-white">
+					<div class="col-sm-3 no-padding">
+						<label>Address</label>
+					</div>
+					<div class="col-sm-9">
+						: 
+					</div>
+				</div>
+			</div>
+			
+
+		</div>
+	</div>
+	<!--End Settings Sidebar-->
+
+
+    <div class="container-fluid">
+    	
+    	<div class="row tool-bar bg-white">
+    		
+			<div class="col-md-6">
+
+				<ul class="nav nav-tabs" id="peoples_tabs">
+				    <!--top level tabs-->
+				  <li class="active"><a href="#activeMembers" data-toggle="tab">Active Members</a>
+				  
+				  </li>
+				  <li><a href="#pendingMembers" data-toggle="tab">Pending Members</a>
+				  	
+				  </li>
+				  
+				</ul>
+
+			</div>
+
+
+
+			<div class="col-md-6">
+				<div class="pull-right ">
+				  <!-- <div class="btn-group pull-right"> -->
+					  <button type="button" class="btn btn-green" data-toggle="modal" data-target="#invitePeoples"><i class="material-icons">add</i> Invite People</button>
+					  		 
+					<!-- </div> -->
+
+				  
+				</div>
+				
+			</div>
+		</div>	
+
+
+		<div class="row">
+			<div class="content person-cont">
+				<div class="row">
+					<!--top level tabs-->
+					
+
+					
+					        <!--Visuals subtabs content-->
+						    <div class="tab-content">
+						    	
+						        <!-- Add Content here -->
+						       	<div id="activeMembers" class="tab-pane active">
+						       		<h5>2 Members</h5>
+						       		<!-- Buttons Section -->
+						       		<div class="peopleBtn-cont">
+						       			<a class="peopleBtn active" href="#R">N</a>
+						       			<a class="peopleBtn" href="#R">R</a>
+						       		</div>	
+						       		
+						       		<div class="people-cont">
+						       			<div id="#R"> 
+							       			<div class="person">
+								       			<img src="https://enterprise-cdn.taskworld.com/assets/default-avatar-4dc02b82.svg">
+								       			<span class="presence"></span>
+								       			<span class="name">Rady Bos</span>
+								       			<span class="department">department</span>
+								       		</div>
+							       		</div>
+							       		<div id="#N"> 
+							       			<div class="person">
+								       			<img src="https://enterprise-cdn.taskworld.com/assets/default-avatar-4dc02b82.svg">
+								       			<span class="presence online"></span>
+								       			<span class="name">Nadim</span>
+								       			<span class="department"></span>
+								       		</div>
+							       		</div>
+						       		</div>
+						       	</div>
+						       			
+						       	<div id="pendingMembers" class="tab-pane">
+						       		<h5>2 Members</h5>
+						       		<ul>
+						       			<li>
+						       				<i class="material-icons big-round-icon">cached</i>
+						       				<!-- <i class="fa fa-refresh big-round-icon" aria-hidden="true"></i> -->
+						       				bozdog.radu@yahoo.com
+						       				<a href="#" class="btn">
+						       					<i class="fa fa-refresh" aria-hidden="true"></i>
+						       					Re-Invite
+						       				</a>
+						       			</li>
+						       		</ul>
+						       	</div>
+						    </div>
+					    </div>
+					    
+				</div>
+			</div>
+		</div>
+
+    <!-- </div> -->
+
+
+		<!-- Modal -->
+		<div class="modal fade workspace " id="manageWorkspace" tabindex="-1" role="dialog" aria-labelledby="manageWorkspaceLabel">
+		  <div class="modal-dialog modal-lg" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">Switch Workspace</h4>
+		      </div>
+		      <div class="modal-body">
+		      
+		        <ul>
+		        	<li>
+		        		<a href="#">Workspace 1
+			        		<div class="checkbox">
+					            <label>
+					                <input type="checkbox" value="" >
+					                <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+					             </label>
+					        </div>
+				        </a>
+		        	</li>
+		        	<li><a href="#">Workspace 2
+		        		<div class="checkbox">
+					            <label>
+					                <input type="checkbox" value="">
+					                <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+					             </label>
+					        </div>
+		        	</a></li>
+		        	<li><a href="#">Workspace 3
+		        		<div class="checkbox">
+					            <label>
+					                <input type="checkbox" value="" checked>
+					                <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+					             </label>
+					        </div>
+		        	</a></li>
+		        	<li><a href="#">Workspace 4
+		        		<div class="checkbox">
+					            <label>
+					                <input type="checkbox" value="" checked>
+					                <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+					             </label>
+					        </div>
+		        	</a></li>
+		        	
+		        </ul>
+		      </div>
+		      <div class="modal-footer">
+
+		      	 <a class="pull-left " href="createWorkspace.html">
+		      	 	<i class="material-icons">add</i>
+		        	Create New Workspace
+		        </a>
+		       
+		         <a class="pull-right" href="#">
+		      	 	<i class="material-icons">remove</i>
+		        	Delete Workspace
+		        </a>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+
+
+
+		<!-- Modal -->
+		<div class="modal fade newproject " id="newProject" tabindex="-1" role="dialog" aria-labelledby="newProjectLabel">
+		  <div class="modal-dialog " role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">New Project</h4>
+		      </div>
+		      <div class="modal-body">
+		      	
+		      	<form>
+				  <div class="form-group">
+				    <label for="name">Name</label>
+				    <input type="text" class="form-control" id="name" placeholder="eg. Website Design">
+				  </div>
+				  <div class="form-group">
+				    <label for="descr">Description (optional)</label>
+				    <input type="text" class="form-control" id="descr" placeholder="">
+				  </div>
+				  
+				  <div class="form-group">
+				    <label for="descr">Privacy Settings</label>
+				    <div class="overflow">
+					    <!-- <div class="radio-container pull-left"> -->
+					    	<label class="radio-container tw-radio-button pull-left">
+					    		<input type="radio" name="privacy" readonly="" value="on">				    		
+						    	<i class="fa fa-lock" aria-hidden="true"></i> Limited Access
+						    </label>
+						    <!-- <div class="radio-sublabel">Only added members can access</div> -->
+						<!-- </div>
+						<div class="radio-container pull-right"> -->
+					    	<label class="radio-container tw-radio-button pull-right">
+					    		<input type="radio" name="privacy" readonly="" >				    		
+						    	<i class="fa fa-globe" aria-hidden="true"></i> Full Access
+						    </label>
+						    <!-- <div class="radio-sublabel">Only added members can access</div> -->
+						<!-- </div> -->
+					 </div>
+				  </div>
+				  <div class="margin-t40 center-text">
+				  	<button class="btn btn-green btn-lg btn200">Create Project</button>
+				  </div>
+				</form>
+		        
+		      </div>
+		      
+		    </div>
+		  </div>
+		</div>
+
+
+		<!-- Modal -->
+		<div class="modal fade invite " id="invitePeoples" tabindex="-1" role="dialog" aria-labelledby="InvitePeoplesLabel">
+		  <div class="modal-dialog " role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">Invite People</h4>
+		      </div>
+		      <div class="modal-body">
+		      	
+		      	<form>
+				  <div class="form-group">
+				    <p>Enter the emails of people that you would like to add to the workspace.</p>
+				  </div>
+				  <div class="form-group">
+				    <textarea class="textarea" rows="6" cols="10" >
+
+				    </textarea>
+				  </div>
+				  
+				  <div class="form-group">
+				    
+				    <div class="overflow">
+					    <!-- <div class="radio-container pull-left"> -->
+					    	<label class="radio-container tw-radio-button pull-left">
+					    		<input type="radio" name="privacy" readonly="" value="on">				    		
+						    	<i class="fa fa-globe" aria-hidden="true"></i> Invite Designer <br/>
+						    	<span class="radio-sublabel">Full access</span>
+						    </label>
+						    
+						<!-- </div>
+						<div class="radio-container pull-right"> -->
+					    	<label class="radio-container tw-radio-button pull-right">
+					    		<input type="radio" name="privacy" readonly="" >				    		
+						    	<i class="fa fa-lock" aria-hidden="true"></i> Invite Client <br/>
+						    	<span class="radio-sublabel">Limited access</span>
+						    </label>
+						    
+						<!-- </div> -->
+					 </div>
+				  </div>
+				  <div class="margin-t40 center-text">
+				  	<button class="btn btn-green btn-lg btn200">Send Invitation</button>
+				  </div>
+				</form>
+		        
+		      </div>		      
+		    </div>
+		  </div>
+		</div>
+
+
+
+
+	
+    <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>	
+	
+</body>

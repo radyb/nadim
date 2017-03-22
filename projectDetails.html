@@ -1,0 +1,760 @@
+<head>
+	<title>LTR/RTL Page</title>
+	
+	<link rel="stylesheet" type="text/css" href="bootstrap-3.3.7-dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/style.css" />	
+	<link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="mdl/material.min.css">
+	<script src="mdl/material.min.js"></script>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+
+	<script type="text/javascript">
+		$(document).ready(function ($) {
+			$(".btn-box.second").click(function(e) {
+		        e.preventDefault();
+		        $(".floating-panel").toggleClass("hiddn", 10000);
+		    });
+		    $('#settings').click(function(e) {
+		        e.preventDefault();
+		        $(".floating-panel").toggleClass("hiddn", 10000);
+		    });
+		    $(".panel-close").click(function(e) {
+		        e.preventDefault();
+		        $(".floating-panel").toggleClass("hiddn", 10000);
+		    });
+
+		    $(".btn-box.first").click(function(e) {
+		        e.preventDefault();
+		        $(this).children(":first").toggleClass("fa-star");
+		        $(this).children(":first").toggleClass("fa-star-o");
+		        $(this).children(":first").toggleClass("color-warning");
+		    });
+
+		   
+		   $(document).on("shown.bs.dropdown", ".dropdown", function () {
+			    // calculate the required sizes, spaces
+			    var $ul = $(this).children(".dropdown-menu");
+			    var $button = $(this).children(".dropdown-toggle");
+			    var ulOffset = $ul.offset();
+			    // how much space would be left on the top if the dropdown opened that direction
+			    var spaceUp = (ulOffset.top - $button.height() - $ul.height()) - $(window).scrollTop();
+			    // how much space is left at the bottom
+			    var spaceDown = $(window).scrollTop() + $(window).height() - (ulOffset.top + $ul.height());
+			    // switch to dropup only if there is no space at the bottom AND there is space at the top, or there isn't either but it would be still better fit
+			    if (spaceDown < 0 && (spaceUp >= 0 || spaceUp > spaceDown))
+			      $(this).addClass("dropup");
+			}).on("hidden.bs.dropdown", ".dropdown", function() {
+			    // always reset after close
+			    $(this).removeClass("dropup");
+			});
+
+			$(".dropdown-menu li a").click(function(){
+			  $(this).parents(".dropdown").find('.btn').html($(this).text() + ' <span class="caret"></span>');
+			  $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
+			});
+
+		$('#interest_tabs').on('click', 'a[data-toggle="tab"]', function(e) {
+		      e.preventDefault();
+
+		      var $link = $(this);
+
+		      if (!$link.parent().hasClass('active')) {
+
+		      	if (!$link.parent().hasClass('child')) {
+		      		//remove active class from other tab-panes
+		      		console.log('not child');
+		      		$('#interest_tabs .tab-pane li.child').removeClass('active');
+		      		$('#interest_tabs .tab-pane').removeClass('active');
+		      		$('#interest_tabs_content .tab-pane').removeClass('active');
+
+		      		$($link.attr('href') + '_tabs li:first').addClass('active');
+		      		$tab = $($link.attr('href') + '_tabs li:first a').attr('href');
+		      		$($tab).addClass('active');
+		        			        
+		      	} else {
+		      		console.log('child');
+		      		$('#interest_tabs_content .tab-pane').removeClass('active');
+		      	}
+		       
+		      } 
+		      
+		    });
+
+			$('.selectUsers li.user').click(function(e) {
+				e.preventDefault();
+				var $el = '<div class="avatar">'+$(this).html()+'</div>';
+				$(this).parent().next('.selectedMembers').append($el);
+			});
+			
+			$(function () {
+			  $('[data-toggle="tooltip"]').tooltip()
+			})
+
+		
+		});	
+	</script>
+</head>
+
+<body dir="">
+	<nav class="navbar top-nav blue-bg navbar-default navbar-static-top">
+        <div class="navbar-header">
+        	<a href="#" class="btn top-btn btn-primary dropdown-toggle" type="button" id="dropdownPlus" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    				<i class="material-icons">add</i>
+    			</a>
+    			<ul class="dropdown-menu top-nav-menu" aria-labelledby="dropdownPlus">
+				    <!-- <li><a href="#" data-toggle="modal" data-target="#manageWorkspace"><i class="fa fa-building" aria-hidden="true"></i> Manage Workspace</a></li> -->
+				    <li><a href="#" data-toggle="modal" data-target="#newProject"><i class="fa fa-folder-open" aria-hidden="true"></i> New Project</a></li>
+				    <li><a href="chat.html"><i class="fa fa-comments" aria-hidden="true"></i> New Chat Message</a></li>
+				    <li><a href="#" data-toggle="modal" data-target="#invitePeoples"><i class="fa fa-users" aria-hidden="true"></i> Invite People</a></li>
+				    
+				    
+				  </ul>
+
+         	<div class="search-box hide-mobile">
+				<input class="" type="text" name="search" />	
+				<a href="#">
+					<i class="fa fa-search" aria-hidden="true"></i>
+				</a>
+			</div>
+        </div>
+
+        <div id="navbar" class="">
+          
+          <ul class="nav navbar-nav navbar-right pull-right">
+          	<!-- <li>
+          		Workspace name
+          	</li> -->
+            <!-- <li><a class="btn dropdown-toggle btn-notiffication" href="#" type="button" id="dropdownNotiffication" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            		<i class="fa fa-bell-o" aria-hidden="true"></i>
+	            </a>
+	            <ul class="dropdown-menu" aria-labelledby="dropdownNotiffication">
+				    <li class="header">Messages</li>
+				    <li><br/></li>
+				    <li><br/></li>
+				   <li><br/></li>
+				    <li><br/></li>
+				    <li><br/></li>
+				    <li><br/></li>
+				  </ul>
+
+	        </li> -->
+            <li>
+            	<a href="#" class="img-btn dropdown-toggle" type="button" id="dropdownPerson" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    				<img src="https://enterprise-cdn.taskworld.com/assets/default-avatar-4dc02b82.svg">
+    				<span class="name">rady Bos</span>
+    			</a>
+    			<ul class="dropdown-menu" aria-labelledby="dropdownPerson">
+				    <li class="avatar-top">
+				    	<a href="#">
+				    		<img src="https://enterprise-cdn.taskworld.com/assets/default-avatar-4dc02b82.svg">
+				    		<div>
+				    			<span class="presence online"></span>
+				    			<span class="name">Radu Bos</span>
+				    			<span class="email">bozdog.radu@gmail.com</span>
+				    		</div>
+				    	</a>
+				    </li>
+				    <li role="separator" class="divider"></li>
+				    <!-- <li><a href="#">Account Settings</a></li>
+				    <li><a href="#">Notiffication Settings</a></li>
+				    <li role="separator" class="divider"></li> -->
+				    <li><a href="#">Sign Out</a></li>
+				   
+				    
+				  </ul>
+
+            	
+            </li>
+          </ul>
+        </div> <!--/.nav-collapse-->
+       </div>
+      
+
+    </nav>
+
+    <!-- Blue Sidebar -->
+    <div class=" sidebar blue-bg">
+		
+			
+		<a href="projectDashboard.html" class="btn btn-primary left-btn-group active" data-toggle="tooltip" data-placement="right" title="Projects">
+			<i class="fa fa-folder-open" aria-hidden="true"></i>
+		</a>
+		<a href="people.html" class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="People">
+			<i class="fa fa-users" aria-hidden="true"></i>
+		</a>
+
+		<a href="chat.html" class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Chat">
+			<i class="fa fa-comments" aria-hidden="true"></i>
+		</a>
+	</div>
+	<!-- Settings Sidebar -->
+	<div class="floating-panel ax-floating-panel hiddn">
+		<a class="panel-close" href="#">
+			<i class="glyphicon glyphicon-remove"></i>
+		</a>
+		<div class="floating-panel-body">
+			<header class="tw-project-properties__header titlebar">
+				<input class="full" type="text" name="title" value="title workspace" />
+				<i class="fa fa-pencil pencil" aria-hidden="true"></i>
+
+				<p>
+					<strong>#5</strong> Created by <strong>Nadim Habr</strong> on Dec 19, Updated a few seconds ago
+				</p>
+			</header>
+			<div class="floating-panel-body-content">
+				
+				<div class="rows">
+					<div class="col-sm-3 no-padding">
+						<label>Project Status</label>
+					</div>
+					<div class="col-sm-9">
+						<div class="dropdown pull-left">
+							  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+							    All projects (3)
+							    <span class="caret"></span>
+							  </button>
+							  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+							    <li><a href="#">All projects (3)</a></li>
+							    <li><a href="#">Active (1)</a></li>
+							    <li><a href="#">Completed (0)</a></li>
+							    <li><a href="#">on Hold (1)</a></li>
+							    <li><a href="#">Cancelled (0)</a></li>
+							    <li><a href="#">No Status (0)</a></li>
+
+							    <li role="separator" class="divider"></li>
+							    <li><a href="#">Archived (0)</a></li>
+							  </ul>
+						</div>
+					</div>	
+				</div>
+				
+				<div class="rows">
+					<div class="col-sm-3 no-padding">
+						<label>Project Admins</label>
+					</div>
+					<div class="col-sm-9">
+						<a class="btn add-button dropdown-toggle pull-left" href="#" id="admins" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+							<i class="material-icons">add</i>
+						</a>
+						<ul class="dropdown-menu selectUsers" aria-labelledby="admins">
+							<li class="title">
+								Members
+							</li>
+						    <li class="search">
+						    	<i class="fa fa-search" aria-hidden="true"></i>
+						    	<input type="text" value="" placeholder="Search by name or email">
+						   	</li>
+						    <li class="user active">
+						    	<img src="https://enterprise-cdn.taskworld.com/assets/default-avatar-4dc02b82.svg">
+						    	Radu Bos
+						    	
+						    	<i class="fa fa-check" aria-hidden="true"></i>
+
+						    </li>
+						    <li class="user">
+						    	<img src="https://enterprise-cdn.taskworld.com/assets/default-avatar-4dc02b82.svg">
+						    	Nadim
+						    </li>						   
+					 	</ul>
+					 	<div class="selectedMembers">
+							
+						</div>
+					</div>
+				</div>
+				<div class="rows">
+					<div class="col-sm-3 no-padding">
+						<label>Project Members</label>
+					</div>
+					<div class="col-sm-9">
+						<a class="btn add-button dropdown-toggle pull-left" href="#" id="members" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+							<i class="material-icons">add</i>
+						</a>
+						
+						<ul class="dropdown-menu selectUsers" aria-labelledby="members">
+							<li class="title">
+								Members
+							</li>
+						    <li class="search">
+						    	<i class="fa fa-search" aria-hidden="true"></i>
+						    	<input type="text" value="" placeholder="Search by name or email">
+						   	</li>
+						    <li class="user">
+						    	<img src="https://enterprise-cdn.taskworld.com/assets/default-avatar-4dc02b82.svg">
+						    	Radu Bos
+						    </li>
+						    <li class="user">
+						    	<img src="https://enterprise-cdn.taskworld.com/assets/default-avatar-4dc02b82.svg">
+						    	Nadim
+						    </li>						   
+					 	</ul>
+
+
+					 	<div class="selectedMembers">
+							<div class="avatar">
+								<img src="https://enterprise-cdn.taskworld.com/assets/default-avatar-4dc02b82.svg">
+								Rady Bos
+							</div>
+						</div>
+					</div>
+					
+					
+
+				</div>
+				<div class="rows overflow">
+					<div class="col-sm-3 no-padding">
+						<label>Permission Settings</label>
+					</div>
+					<div class="col-sm-9">
+							<!-- <div class="dropdown pull-left">
+							  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+							    Project Members have FULL access
+							    <span class="caret"></span>
+							  </button>
+							  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+							    <li><a href="#">Project Members have FULL access</a></li>
+							     <li><a href="#">Project Members have LIMITED access</a></li>					 
+							  </ul>
+							</div> 
+							<br/><br/><br/> -->
+						<strong>Admins: </strong> Project Admins have Full Access <br/> <br/>
+						<strong>Members:</strong> Project Members have Limited Access
+					</div>
+				</div>	
+				<div class="rows overflow">
+					<div class="col-sm-3 no-padding">
+						<label>Copy Project</label>
+					</div>
+					<div class="col-sm-9">
+							<a href="#" class="btn btn-gray btn200">Copy Project</a> 
+							<br/><br/>
+						Create a copy of this project, including all its resources such as Tasks, Tasklists and Files.
+					</div>
+				</div>	
+				<div class="rows overflow">
+					<div class="col-sm-3 no-padding">
+						<label>Archive Project</label>
+					</div>
+					<div class="col-sm-9">
+							<a href="#" class="btn btn-gray btn200">Archive Project</a> 							
+					</div>
+				</div>
+				<!-- <div class="rows">
+					<label>Project Group</label>
+					No Project group
+				</div> -->
+
+			</div>
+			
+
+		</div>
+	</div>
+	<!--End Settings Sidebar-->
+
+
+    <div class="container-fluid">
+    	
+    	<div class="row tool-bar tool-bar-tall bg-white">
+    		<div class="col-md-3 titlebar">
+				<a class="pull-left margin-t0" href="projectDashboard.html">
+					<i class="fa fa-angle-left fa-2x" aria-hidden="true"></i>
+				</a>
+				<a class="pull-left margin-t8" href="#">
+					<i class="fa fa-star-o " aria-hidden="true"></i>
+				</a>
+				<input type="text" name="title" value="title workspace" />
+				<i class="fa fa-pencil pencil" aria-hidden="true"></i>
+				<!-- <div class="dropdown pull-left">
+				  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+				    Full
+				    <span class="caret"></span>
+				  </button>
+				  <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+				    <li><a href="#">Full</a></li>
+				    <li><a href="#">Limited</a></li>				    
+				  </ul>
+				</div> -->
+			</div>
+			<div class="col-md-6">
+
+				<ul class="nav nav-tabs" id="interest_tabs">
+				    <!--top level tabs-->
+				  <li class="active"><a href="#visuals" data-toggle="tab">Drawings</a>
+				  	<div id="visuals" class="tab-pane active">
+				        <ul class="nav nav-tabs" id="visuals_tabs">
+				            <li class="child active"><a href="#all_2d" data-toggle="tab">3D</a></li>
+				            <li class="child"><a href="#all_3d" data-toggle="tab">VR</a></li>
+				        </ul>
+				    </div>
+				  </li>
+				  <li><a href="#requirements" data-toggle="tab">Requirements</a>
+				  	<div id="requirements" class="tab-pane">
+				        <ul class="nav nav-tabs" id="requirements_tabs">				            
+				            <li class="child"><a href="#requirements_ideapad" data-toggle="tab">Ideapad</a></li>
+				            <li class="child"><a href="#requirements_final" data-toggle="tab">Final</a></li>
+				        </ul>
+				    </div>
+				  </li>
+				  <li><a href="#material" data-toggle="tab">BOQ</a>
+				  </li>
+				  <li><a href="#documents" data-toggle="tab">Documents</a>
+				  	<div id="documents" class="tab-pane">
+				        <ul class="nav nav-tabs" id="documents_tabs">
+				            <li class="child"><a href="#documents_sharred" data-toggle="tab">Sharred</a></li>
+				            <li class="child"><a href="#documents_private" data-toggle="tab">Private</a></li>
+				        </ul>
+				    </div>
+				  </li>  
+				</ul>
+
+				
+  
+			</div>
+
+
+
+			<div class="col-md-3">
+				<div class="pull-right ">
+				  
+				  <!-- <button id="chat" type="button" class="btn btn-default"> <i class="fa fa-comments" aria-hidden="true"></i> <span class="hide-mobile">Project Chat</span></button> -->
+				  <button id="settings" type="button" class="btn btn-default"> <i class="fa fa-cog" aria-hidden="true"></i> <span class="hide-mobile">Settings</span></button>
+				</div>
+				
+			</div>
+		</div>	
+
+
+		<div class="row">
+			<div class="content">
+
+				<div class="row">
+				    <div class="tab-content" id="interest_tabs_content">
+			        <!-- Add Content here -->
+				       <div id="documents_sharred" class="tab-pane">
+				       		<div class="row center-text" >
+								<a class="btn-with-icon btn-green pull-right" href="#">
+						    		<i class="fa fa-trash-o" aria-hidden="true"></i>
+						    	</a>
+						    	<div class="btn-group pull-right">
+							    	<a class="btn-with-2-icon btn-green dropdown-toggle" href="#" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							    		<span class="fa-stack">
+								    		<i class="fa fa-folder-o fa-stack-2x" aria-hidden="true"></i>
+								    		<i class="fa fa-plus fa-stack-1x" aria-hidden="true"></i>
+								    	</span>
+							    	</a>
+
+							    	<ul class="dropdown-menu" aria-labelledby="dropPlus">
+								    <li>
+								    	<a href="#">
+								    		<i class="fa fa-file-text-o" aria-hidden="true"></i>
+								    		New Folder
+								    	</a>
+								    	<a href="#">
+								    		<i class="fa fa-paperclip" aria-hidden="true"></i>
+								    		Upload File
+								    	</a>
+								   	</li>
+								 </ul>
+								</div>
+							</div>
+				       		<div class="folder dropdown" href="#">
+				       			Name of Folder
+
+				       			<span class="btn settings dropdown-toggle" id="dropSettings" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+				       				<i class="fa fa-cog" aria-hidden="true"></i>
+				       				<span class="caret"></span>
+				       			</span>
+
+				       			<ul class="dropdown-menu" aria-labelledby="dropSettings">
+								    <li>
+								    	<a class="btn-delete" href="#">
+								    		<i class="fa fa-trash-o" aria-hidden="true"></i>
+								    		Delete
+								    	</a>
+								   	</li>
+								 </ul>
+				       		</div>
+
+				       		<div class="dropdown pull-left">
+
+				       		<div class="folder-plus dropdown-toggle" id="dropPlus" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+				       			<i class="material-icons">add</i>
+				       		</div>
+				       			<ul class="dropdown-menu" aria-labelledby="dropPlus">
+								    <li>
+								    	<a href="#">
+								    		<i class="fa fa-file-text-o" aria-hidden="true"></i>
+								    		New folder
+								    	</a>
+								    	<a href="#">
+								    		<i class="fa fa-paperclip" aria-hidden="true"></i>
+								    		Upload File
+								    	</a>
+								   	</li>
+								 </ul>
+								</div>
+				       	</div>
+
+				       <div id="documents_private" class="tab-pane">
+				       		<div class="row center-text" >
+								<a class="btn-with-icon btn-green pull-right" href="#">
+						    		<i class="fa fa-trash-o" aria-hidden="true"></i>
+						    	</a>
+						    	<div class="btn-group pull-right">
+							    	<a class="btn-with-2-icon btn-green dropdown-toggle" href="#" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							    		<span class="fa-stack">
+								    		<i class="fa fa-folder-o fa-stack-2x" aria-hidden="true"></i>
+								    		<i class="fa fa-plus fa-stack-1x" aria-hidden="true"></i>
+								    	</span>
+							    	</a>
+
+							    	<ul class="dropdown-menu" aria-labelledby="dropPlus">
+								    <li>
+								    	<a href="#">
+								    		<i class="fa fa-file-text-o" aria-hidden="true"></i>
+								    		New Folder
+								    	</a>
+								    	<a href="#">
+								    		<i class="fa fa-paperclip" aria-hidden="true"></i>
+								    		Upload File
+								    	</a>
+								   	</li>
+								 </ul>
+								</div>
+							</div>
+				       		<div class="folder dropdown" href="#">
+				       			Name of Folder
+
+				       			<span class="btn settings dropdown-toggle" id="dropSettings" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+				       				<i class="fa fa-cog" aria-hidden="true"></i>
+				       				<span class="caret"></span>
+				       			</span>
+
+				       			<ul class="dropdown-menu" aria-labelledby="dropSettings">
+								    <li>
+								    	<a class="btn-delete" href="#">
+								    		<i class="fa fa-trash-o" aria-hidden="true"></i>
+								    		Delete
+								    	</a>
+								   	</li>
+								 </ul>
+				       		</div>
+
+				       		<div class="folder dropdown" href="#">
+				       			Second Folder
+
+				       			<span class="btn settings dropdown-toggle" id="dropSettings" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+				       				<i class="fa fa-cog" aria-hidden="true"></i>
+				       				<span class="caret"></span>
+				       			</span>
+
+				       			<ul class="dropdown-menu" aria-labelledby="dropSettings">
+								    <li>
+								    	<a class="btn-delete" href="#">
+								    		<i class="fa fa-trash-o" aria-hidden="true"></i>
+								    		Delete
+								    	</a>
+								   	</li>
+								 </ul>
+				       		</div>
+
+
+				       		<div class="dropdown pull-left">
+
+				       		<div class="folder-plus dropdown-toggle" id="dropPlus" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+				       			<i class="material-icons">add</i>
+				       		</div>
+				       			<ul class="dropdown-menu" aria-labelledby="dropPlus">
+								    <li>
+								    	<a href="#">
+								    		<i class="fa fa-file-text-o" aria-hidden="true"></i>
+								    		New folder
+								    	</a>
+								    	<a href="#">
+								    		<i class="fa fa-paperclip" aria-hidden="true"></i>
+								    		Upload File
+								    	</a>
+								   	</li>
+								 </ul>
+								</div>
+				       </div>
+				    </div>
+			    </div>
+				    
+			</div>
+		</div>
+	</div>
+
+  
+		<!-- Modal -->
+		<div class="modal fade workspace " id="manageWorkspace" tabindex="-1" role="dialog" aria-labelledby="manageWorkspaceLabel">
+		  <div class="modal-dialog modal-lg" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">Switch Workspace</h4>
+		      </div>
+		      <div class="modal-body">
+		      
+		        <ul>
+		        	<li>
+		        		<a href="#">Workspace 1
+			        		<div class="checkbox">
+					            <label>
+					                <input type="checkbox" value="" >
+					                <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+					             </label>
+					        </div>
+				        </a>
+		        	</li>
+		        	<li><a href="#">Workspace 2
+		        		<div class="checkbox">
+					            <label>
+					                <input type="checkbox" value="">
+					                <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+					             </label>
+					        </div>
+		        	</a></li>
+		        	<li><a href="#">Workspace 3
+		        		<div class="checkbox">
+					            <label>
+					                <input type="checkbox" value="" checked>
+					                <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+					             </label>
+					        </div>
+		        	</a></li>
+		        	<li><a href="#">Workspace 4
+		        		<div class="checkbox">
+					            <label>
+					                <input type="checkbox" value="" checked>
+					                <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+					             </label>
+					        </div>
+		        	</a></li>
+		        	
+		        </ul>
+		      </div>
+		      <div class="modal-footer">
+
+		      	 <a class="pull-left " href="createWorkspace.html">
+		      	 	<i class="material-icons">add</i>
+		        	Create New Workspace
+		        </a>
+		       
+		         <a class="pull-right" href="#">
+		      	 	<i class="material-icons">remove</i>
+		        	Delete Workspace
+		        </a>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+
+
+
+		<!-- Modal -->
+		<div class="modal fade newproject " id="newProject" tabindex="-1" role="dialog" aria-labelledby="newProjectLabel">
+		  <div class="modal-dialog " role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">New Project</h4>
+		      </div>
+		      <div class="modal-body">
+		      	
+		      	<form>
+				  <div class="form-group">
+				    <label for="name">Name</label>
+				    <input type="text" class="form-control" id="name" placeholder="eg. Website Design">
+				  </div>
+				  <div class="form-group">
+				    <label for="descr">Description (optional)</label>
+				    <input type="text" class="form-control" id="descr" placeholder="">
+				  </div>
+				  
+				<!--   <div class="form-group">
+				    <label for="descr">Privacy Settings</label>
+				    <div class="overflow">
+					    	<label class="radio-container tw-radio-button pull-left ">
+					    		<input type="radio" name="privacy" readonly="" value="on">				    		
+						    	<i class="fa fa-lock" aria-hidden="true"></i> Limited Access
+						    </label>
+						    
+					    	<label class="radio-container tw-radio-button pull-right">
+					    		<input type="radio" name="privacy" readonly="" >				    		
+						    	<i class="fa fa-globe" aria-hidden="true"></i> Full Access
+						    </label>
+						   
+					 </div>
+				  </div> -->
+				  <div class="margin-t40 center-text">
+				  	<button class="btn btn-green btn-lg btn200">Create Project</button>
+				  </div>
+				</form>
+		        
+		      </div>
+		      
+		    </div>
+		  </div>
+		</div>
+
+
+		<!-- Modal -->
+		<div class="modal fade invite " id="invitePeoples" tabindex="-1" role="dialog" aria-labelledby="InvitePeoplesLabel">
+		  <div class="modal-dialog " role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">Invite People</h4>
+		      </div>
+		      <div class="modal-body">
+		      	
+		      	<form>
+				  <div class="form-group">
+				    <p>Enter the emails of people that you would like to add to the workspace.</p>
+				  </div>
+				  <div class="form-group">
+				    <textarea class="textarea" rows="6" cols="10" >
+
+				    </textarea>
+				  </div>
+				  
+				  <div class="form-group">
+				    
+				    <div class="overflow">
+					    <!-- <div class="radio-container pull-left"> -->
+					    	<label class="radio-container tw-radio-button pull-left">
+					    		<input type="radio" name="privacy" readonly="" value="on">				    		
+						    	<i class="fa fa-globe" aria-hidden="true"></i> Invite Designer <br/>
+						    	<span class="radio-sublabel">Full access</span>
+						    </label>
+						    
+						<!-- </div>
+						<div class="radio-container pull-right"> -->
+					    	<label class="radio-container tw-radio-button pull-right">
+					    		<input type="radio" name="privacy" readonly="" >				    		
+						    	<i class="fa fa-lock" aria-hidden="true"></i> Invite Client <br/>
+						    	<span class="radio-sublabel">Limited access</span>
+						    </label>
+						    
+						<!-- </div> -->
+					 </div>
+				  </div>
+				  <div class="margin-t40 center-text">
+				  	<button class="btn btn-green btn-lg btn200">Send Invitation</button>
+				  </div>
+				</form>
+		        
+		      </div>		      
+		    </div>
+		  </div>
+		</div>
+
+
+	
+	
+    <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>	
+	
+</body>

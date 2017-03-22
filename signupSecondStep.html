@@ -1,0 +1,192 @@
+<head>
+	<title>LTR/RTL Page</title>
+	
+	<link rel="stylesheet" type="text/css" href="bootstrap-3.3.7-dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/style.css" />	
+	<link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="mdl/material.min.css">
+	<script src="mdl/material.min.js"></script>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+
+	<script type="text/javascript">
+		$(document).ready(function ($) {
+			$(".btn-box.second").click(function(e) {
+		        e.preventDefault();
+		        $(".floating-panel").toggleClass("hiddn", 10000);
+		    });
+		    $(".panel-close").click(function(e) {
+		        e.preventDefault();
+		        $(".floating-panel").toggleClass("hiddn", 10000);
+		    });
+
+		    $(".btn-box.first").click(function(e) {
+		        e.preventDefault();
+		        $(this).children(":first").toggleClass("fa-star");
+		        $(this).children(":first").toggleClass("fa-star-o");
+		        $(this).children(":first").toggleClass("color-warning");
+		    });
+
+		   
+		   $(document).on("shown.bs.dropdown", ".dropdown", function () {
+			    // calculate the required sizes, spaces
+			    var $ul = $(this).children(".dropdown-menu");
+			    var $button = $(this).children(".dropdown-toggle");
+			    var ulOffset = $ul.offset();
+			    // how much space would be left on the top if the dropdown opened that direction
+			    var spaceUp = (ulOffset.top - $button.height() - $ul.height()) - $(window).scrollTop();
+			    // how much space is left at the bottom
+			    var spaceDown = $(window).scrollTop() + $(window).height() - (ulOffset.top + $ul.height());
+			    // switch to dropup only if there is no space at the bottom AND there is space at the top, or there isn't either but it would be still better fit
+			    if (spaceDown < 0 && (spaceUp >= 0 || spaceUp > spaceDown))
+			      $(this).addClass("dropup");
+			}).on("hidden.bs.dropdown", ".dropdown", function() {
+			    // always reset after close
+			    $(this).removeClass("dropup");
+			});
+
+			$(".dropdown-menu li a").click(function(){
+			  $(this).parents(".dropdown").find('.btn').html($(this).text() + ' <span class="caret"></span>');
+			});
+			$(".country-cont .dropdown-menu li a").click(function(){
+			  $(this).parents(".dropdown").find('.btn').html($(this).text() + ' <span class="caret"></span>');
+			  $(".state-cont").addClass('hidden');
+			});
+
+			$("#phonePrefix li a").click(function(){
+			  
+			  var value = $(this).text();
+
+			  $(this).parents(".dropdown").find('.btn').html(value.substring(value.indexOf('(')+1, (value.length-1)) + ' <span class="caret"></span>');
+			 
+			});
+
+			$("#changeCountry").click(function(){
+			  
+			 	$(this).toggleClass('hidden');
+			 	$(".country-cont").toggleClass('hidden');
+			});
+
+		});	
+	</script>
+</head>
+
+<body dir="">
+
+	
+	<div class="container-fluid onboarding">
+		<h3 class="">Basic Info</h3>
+		<h6 class="center-text">Tell us a little about your business. (Not a professional? 
+					<a class="small-anchor" href="#">
+						Continue to Designhubz</a>)
+
+				</h4>
+			<form>
+				
+				
+				<h5>Business Information</h5>
+				<div class="row margin-b10">
+					<div class="col-sm-12 "> 
+						<label for="company" class="mandatory">Professional/company name</label>
+						<input type="text" id="company" class="form-control" placeholder="Minimum 4 characters" required="" autofocus="">
+					</div>
+					
+				</div>
+				<div class="row margin-b10">
+					<div class="col-sm-12"> 
+						<label for="category" class="mandatory">Category</label>
+						<div class="dropdown">
+						  <button class="btn btn-block btn-default dropdown-toggle" type="button" id="dropdownCategory" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						    Architects
+						    <span class="caret"></span>
+						  </button>
+						  <ul class="dropdown-menu" aria-labelledby="dropdownCategory">
+						    <li><a href="#">ArchItects</a></li>
+						    <li><a href="#">Interior Designers</a></li>
+						    <li><a href="#">Engineering and contracting</a></li>
+						    <li><a href="#">Landscape Design</a></li>
+						    <li><a href="#">Urban Planning</a></li>
+						  </ul>
+						</div>
+					</div>
+					
+				</div>
+				<div class="row margin-b10">
+					<div class="col-sm-6"> 
+						<label for="city" class="mandatory">City</label>
+						<input type="text" id="city" class="form-control" placeholder="City" required="" autofocus="">
+					</div>
+					<div class="col-sm-6 state-cont"> 
+						<label for="state" class="mandatory">State</label>
+						<input type="text" id="state" class="form-control" placeholder="State" required="" autofocus="">
+					</div>
+				</div>
+				<div class="row margin-b10">
+					<div class="col-sm-12 ">
+						<a id="changeCountry" class="small-anchor" href="#">
+							Not in United States? Change Country
+						</a>
+					</div>
+				</div>
+				<div class="row margin-b10 country-cont hidden">
+					<div class="col-sm-12">
+						<label for="phone" class="mandatory">Country</label>
+						<div class="dropdown">
+						  <button class="btn btn-block btn-default dropdown-toggle" type="button" id="dropdownCountry" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						    Select Country
+						    <span class="caret"></span>
+						  </button>
+						  <ul class="dropdown-menu" aria-labelledby="dropdownCountry">
+						    <li><a href="#">Afganistan</a></li>
+						    <li><a href="#">Albania</a></li>
+						    <li><a href="#">Algeria</a></li>
+						    <li><a href="#">American Samoa</a></li>
+						    <li><a href="#">Andorra</a></li>
+						    <li><a href="#">United States</a></li>
+						  </ul>
+						</div>
+					</div>
+				</div>
+				<div class="row margin-b30">
+					<div class="col-sm-3">
+						<label for="phone" class="mandatory">Phone</label>
+						<div class="dropdown">
+						  <button class="btn btn-block btn-default dropdown-toggle" type="button" id="dropdownPhonePrefix" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						    +44 
+						    <span class="caret"></span>
+						  </button>
+						  <ul class="dropdown-menu" id="phonePrefix" aria-labelledby="dropdownPhonePrefix">
+						    <li><a href="#">Afganistan (+93)</a></li>
+						    <li><a href="#">Albania (+355)</a></li>
+						    <li><a href="#">Algeria (+213)</a></li>
+						    <li><a href="#">American Samoa (+1684)</a></li>
+						    <li><a href="#">Andorra (+376)</a></li>
+						    <li><a href="#">United States (+1)</a></li>
+						  </ul>
+						</div>
+					</div>
+					<div class="col-sm-9">
+						<label for="phone" class="">&nbsp;</label>
+						<input type="text" id="phone" class="form-control" placeholder="Phone number" required="" autofocus="">
+					</div>
+				</div>	
+				<div class="row ">
+					<div class="col-sm-12 center-text">
+						<button class="btn btn-green btn-lg btn200" type="submit">
+							Go to Designhubz
+						</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>	
+
+
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>	
+	
+</body>
